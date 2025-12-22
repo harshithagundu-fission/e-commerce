@@ -3,17 +3,34 @@ import Homepage from"../views/Homepage.vue";
 import About from"../views/about.vue";
 import Services from"../views/Services.vue";
 import Pricing from"../views/Pricing.vue";
+import Contacts from '../views/Contacts.vue';
+import Login from '../views/Login.vue';
+import Loggingout from '../views/Loggingout.vue';
+import 'flowbite';
+ 
+
+
 const routes=[
     {
     path:"/",
     name:"Homepage",
-    component:Homepage
+    // Show Services on the root so main page displays products
+    component:Services
     },
-
-    {
+{
         path:"/about",
         name:"About",
         component:About
+    },
+    {
+        path:"/login",
+        name:"Login",
+        component:Login
+    },
+    {
+        path:"/logout",
+        name:"Loggingout",
+        component:Loggingout
     },
     {   
         path:"/services",
@@ -24,7 +41,16 @@ const routes=[
         path:"/pricing",
         name:"Pricing",
         component:Pricing
-    }
+    },
+    {
+        path:"/contacts",
+        name:"Contacts",
+        component:Contacts
+    },
+    
+    
+   
+    
 ];
 const router=createRouter({
     history:createWebHistory(),

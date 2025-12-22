@@ -30,6 +30,11 @@
         </li>
       </ul>
     </div>
+    <!-- Right side actions (always visible) -->
+    <div class="flex items-center space-x-3">
+      <LoginButton />
+      <LogoutButton />
+    </div>
   </div>
 </nav>
 
@@ -38,6 +43,7 @@
 </template>
 
 <script setup>
-
+import LoginButton from './LoginButton.vue'
+import LogoutButton from './LogoutButton.vue'
 </script>
 
