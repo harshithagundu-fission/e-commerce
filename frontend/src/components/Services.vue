@@ -41,11 +41,13 @@
       <div v-else-if="error" class="py-12 text-center text-red-600">Error: {{ error }}</div>
 
       <div v-else class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <article v-for="product in products" :key="product.id" :class="['border rounded-lg p-4 bg-white shadow-sm relative', isSelected(product.id) ? 'ring-2 ring-fg-brand' : '']" @click.self="toggleSelect(product.id)">
+        <article v-for="(product, idx) in products" :key="product.id" :class="['border rounded-lg p-4 bg-white shadow-sm relative', isSelected(product.id) ? 'ring-2 ring-fg-brand' : '']" @click.self="toggleSelect(product.id)">
           <label class="absolute top-2 left-2 inline-flex items-center">
             <input type="checkbox" :checked="isSelected(product.id)" @change.stop.prevent="toggleSelect(product.id)" class="w-4 h-4" />
           </label>
-          <img :src="product.image" alt="" class="h-40 w-full object-contain mb-3" />
+          <router-link :to="`/product/${product.id}`">
+            <img :src="product.image" alt="" class="h-40 w-full object-contain mb-3 cursor-pointer" />
+          </router-link>
           <h2 class="text-md font-semibold truncate">{{ product.title }}</h2>
           <p class="text-sm text-body line-clamp-2 my-2">{{ product.description }}</p>
           <div class="flex items-center justify-between mt-3">
@@ -61,7 +63,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Header from '../components/Header.vue'
+import { useCart } from '../stores/cart'
 
 const products = ref([])
 const loading = ref(false)
@@ -130,8 +132,10 @@ function clearSelection() {
 
 function addProductToSelection(product) {
   // Example action when clicking Add on a product card: ensure it's selected and show console
+  const cart = useCart()
+  cart.addItem(product, 1)
   if (!isSelected(product.id)) selected.value.unshift(product.id)
-  console.log('Product added/selected:', product)
+  console.log('Product added to cart and selected:', product)
 }
 
 async function addProduct() {

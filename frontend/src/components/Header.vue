@@ -20,18 +20,21 @@
           <a href="/about" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">About</a>
         </li>
         <li>
-          <a href="/Services" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Services</a>
-        </li>
-        <li>
           <a href="/pricing" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Pricing</a>
         </li>
         <li>
           <a href="/contacts" class="block py-2 px-3 text-heading rounded hover:bg-neutral-tertiary md:hover:bg-transparent md:border-0 md:hover:text-fg-brand md:p-0 md:dark:hover:bg-transparent">Contact</a>
         </li>
+        
       </ul>
     </div>
     <!-- Right side actions (always visible) -->
     <div class="flex items-center space-x-3">
+      <router-link to="/cart" class="flex items-center px-3 py-2 rounded hover:bg-neutral-tertiary">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4"/></svg>
+        <span class="ml-2">Cart</span>
+        <span class="ml-2 bg-white text-black px-2 py-0.5 rounded-full text-sm">{{ cart.totalCount }}</span>
+      </router-link>
       <LoginButton />
       <LogoutButton />
     </div>
@@ -45,5 +48,8 @@
 <script setup>
 import LoginButton from './LoginButton.vue'
 import LogoutButton from './LogoutButton.vue'
+import { useCart } from '../stores/cart'
+
+const cart = useCart()
 </script>
 
