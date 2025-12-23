@@ -9,10 +9,10 @@
       <!-- Add Product Form -->
       <div class="mb-6">
         <form @submit.prevent="addProduct" class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end">
-          <input v-model="newProduct.title" placeholder="Title" required class="p-2 border rounded" />
-          <input v-model.number="newProduct.price" type="number" placeholder="Price" required class="p-2 border rounded" />
-          <input v-model="newProduct.image" placeholder="Image URL" class="p-2 border rounded sm:col-span-2" />
-          <textarea v-model="newProduct.description" placeholder="Description" rows="2" class="p-2 border rounded sm:col-span-2"></textarea>
+          <!-- <input v-model="newProduct.title" placeholder="Title" required class="p-2 border rounded" /> -->
+          <!-- <input v-model.number="newProduct.price" type="number" placeholder="Price" required class="p-2 border rounded" /> -->
+          <!-- <input v-model="newProduct.image" placeholder="Image URL" class="p-2 border rounded sm:col-span-2" /> --> -->
+          <!-- <textarea v-model="newProduct.description" placeholder="Description" rows="2" class="p-2 border rounded sm:col-span-2"></textarea> -->
           <div class="sm:col-span-2">
             <button type="submit" class="bg-fg-brand text-white px-4 py-2 rounded">Create product</button>
           </div>
@@ -48,8 +48,8 @@
           <router-link :to="`/product/${product.id}`">
             <img :src="product.image" alt="" class="h-40 w-full object-contain mb-3 cursor-pointer" />
           </router-link>
-          <h2 class="text-md font-semibold truncate">{{ product.title }}</h2>
-          <p class="text-sm text-body line-clamp-2 my-2">{{ product.description }}</p>
+          <!-- <h2 class="text-md font-semibold truncate">{{ product.title }}</h2> -->
+          <!-- <p class="text-sm text-body line-clamp-2 my-2">{{ product.description }}</p> -->
           <div class="flex items-center justify-between mt-3">
             <span class="font-bold">${{ product.price }}</span>
             <button @click.stop.prevent="addProductToSelection(product)" class="bg-fg-brand text-white px-3 py-1 rounded">Add</button>
