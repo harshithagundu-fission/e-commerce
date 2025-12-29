@@ -13,15 +13,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCart } from '../stores/cart'
 
 const router = useRouter()
+const cart = useCart()
 const message = ref('')
 
 function clearAuth() {
   try {
     localStorage.removeItem('authToken')
     localStorage.removeItem('authEmail')
-    // clear any other keys your app uses
+    localStorage.removeItem('authId')
   } catch (e) {
     // ignore
   }
@@ -29,7 +31,10 @@ function clearAuth() {
 
 function doLogout() {
   clearAuth()
-  message.value = 'Logged out successfully. You can close this page or go back to the home page.'
+  try { cart.clear() } catch (e) {}
+  try { window.dispatchEvent(new Event('storage')) } catch (e) {}
+  message.value = 'Logged out successfully. Redirecting to login screen...'
+  setTimeout(() => router.replace('/loggedout'), 800)
 }
 
 function cancel() {
@@ -37,14 +42,14 @@ function cancel() {
 }
 
 onMounted(() => {
-  // If user already logged out, show a note; otherwise prompt to click the button
+  // Always clear auth when visiting this route, then redirect
   try {
-    const hasAuth = !!(localStorage.getItem('authToken') || localStorage.getItem('authEmail'))
-    if (!hasAuth) message.value = 'You are already logged out.'
-    else message.value = ''
-  } catch (e) {
-    message.value = ''
-  }
+    clearAuth()
+    try { cart.clear() } catch (e) {}
+    try { window.dispatchEvent(new Event('storage')) } catch (e) {}
+  } catch (e) {}
+  message.value = 'You have been logged out. Redirecting to login screen...'
+  setTimeout(() => router.replace('/loggedout'), 800)
 })
 </script>
 

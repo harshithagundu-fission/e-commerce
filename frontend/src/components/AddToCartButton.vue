@@ -7,13 +7,29 @@
 <script setup>
 import { useCart } from '../stores/cart'
 
+const props = defineProps({
+  product: { type: Object, default: null },
+  size: { type: String, default: '' }
+})
+
 const cart = useCart()
 
-// Example product data used by this demo button.
+// product data used by demo button when no product passed
 const demoProduct = { id: 101, title: 'FoldSack Backpack', price: 109.95 }
 
 function addToCart() {
-  cart.addItem(demoProduct, 1)
+  const product = props.product || demoProduct
+  const size = props.size || ''
+
+  if (props.product && !size && props.product.category !== 'electronics') {
+    alert('please select the size first, to add the products to the cart')
+    return
+  }
+
+  const opts = {}
+  if (size) opts.size = size
+
+  cart.addItem(product, 1, opts)
   alert('Product added to cart!')
 }
 </script>

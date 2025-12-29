@@ -2,25 +2,21 @@ import{createRouter,createWebHistory}from"vue-router";
 import Homepage from"../views/Homepage.vue";
 import About from"../views/about.vue";
 import Services from"../components/Services.vue";
-import Pricing from"../views/Pricing.vue";
-import Contacts from '../views/Contacts.vue';
 import Login from '../views/Login.vue';
 import Loggingout from '../views/Loggingout.vue';
 import ProductDetail from '../components/ProductDetail.vue';
 import Cart from '../views/Cart.vue';
-import 'flowbite';
 import bag from '../views/Products/bag.vue';
 import BuyNow from "../views/BuyNow.vue";
 import AddToCartButton from "../components/AddToCartButton.vue";
+import LoggedOut from "../views/LoggedOut.vue";
 
- 
 
 
 const routes=[
     {
     path:"/",
     name:"Homepage",
-    // Show Services on the root so main page displays products
     component:Homepage
     },
 {
@@ -31,7 +27,8 @@ const routes=[
     {
         path:"/login",
         name:"Login",
-        component:Login
+        component:Login,
+        meta: { hideHeader: true }
     },
     {
         path: "/bag",
@@ -41,7 +38,8 @@ const routes=[
     {
         path:"/logout",
         name:"Loggingout",
-        component:Loggingout
+        component:Loggingout,
+        meta: { hideHeader: true }
     },
     {
         path: '/product/:id',
@@ -59,26 +57,23 @@ const routes=[
         name:"Services",
         component:Services
     },
-    {
-        path:"/pricing",
-        name:"Pricing",
-        component:Pricing
-    },
-    {
-        path:"/contacts",
-        name:"Contacts",
-        component:Contacts
-    },
     {   
         path:"/buynow",
         name:"BuyNow",
         component:BuyNow
     },
+        {
+            path: '/loggedout',
+            name: 'LoggedOut',
+            component: LoggedOut,
+            meta: { hideHeader: true }
+        },
     {
         path:"/addtocartbutton",
         name:"AddToCartButton",
         component:AddToCartButton   
-    }
+    },
+   
         
    
     

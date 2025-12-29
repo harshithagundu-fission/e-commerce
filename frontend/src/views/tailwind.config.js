@@ -7,3 +7,12 @@ module.exports = {
     require('flowbite/plugin')
   ],
 }
+
+
+// export default {
+//   content: ['./index.html', './src/**/*.{vue,js}'],
+//   theme: {
+//     extend: {},
+//   },
+//   plugins: [],
+// }

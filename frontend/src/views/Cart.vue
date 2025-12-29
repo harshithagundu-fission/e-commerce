@@ -7,6 +7,7 @@
         <div>
           <div class="font-semibold">{{ item.title }}</div>
           <div class="text-sm text-muted">Qty: {{ item.qty }}</div>
+          <div v-if="item.size" class="text-sm text-muted">Size: {{ item.size }}</div>
         </div>
         <div class="text-right">
           <div class="font-semibold">${{ (item.price * item.qty).toFixed(2) }}</div>

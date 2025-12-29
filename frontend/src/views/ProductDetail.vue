@@ -11,10 +11,13 @@
         <p class="text-body mb-4">{{ product.description }}</p>
 
                 <div class="flex items-center gap-3">
-                  <button @click="addToCart" class="bg-fg-brand text-white px-4 py-2 rounded">Add to cart</button>
-                  <BuyNowButton :product="product" />
-                  <router-link to="/" class="text-sm text-muted">Back to products</router-link>
-                </div>
+                          <button @click="addToCart" class="bg-fg-brand text-white px-4 py-2 rounded">Add to cart</button>
+                          <BuyNowButton :product="product" />
+                          <router-link to="/" class="text-sm text-muted">Back to products</router-link>
+                        <div>
+                          <SizeButtons v-model="selectedSize" :category="product?.category" />
+                        </div>
+                        </div>
       </div>
     </div>
   </div>
@@ -26,6 +29,7 @@ import { useRoute } from 'vue-router'
 import axios from 'axios'
 import { useCart } from '../stores/cart'
 import BuyNowButton from '../components/BuyNowButton.vue'
+import SizeButtons from '../components/SizeButtons.vue'
 
 
 const route = useRoute()
@@ -34,6 +38,7 @@ const id = route.params.id
 const product = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const selectedSize = ref(null)
 
 async function fetchProduct() {
   loading.value = true
@@ -50,10 +55,13 @@ async function fetchProduct() {
 
 function addToCart() {
   const cart = useCart()
-  if (product.value) {
-    cart.addItem(product.value, 1)
-    alert('Added to cart')
+  if (!product.value) return
+  if (!selectedSize.value) {
+    alert('please select the size first, to add the products to the cart')
+    return
   }
+  cart.addItem(product.value, 1, { size: selectedSize.value })
+  alert('Added to cart')
 }
 
 onMounted(() => {

@@ -17,7 +17,7 @@
           <router-link to="/" class="text-sm text-muted">Back to products</router-link>
 
           <div>
-            <SizeButtons />
+            <SizeButtons v-model="selectedSize" :category="product?.category" />
           </div>
 
         </div>
@@ -25,8 +25,8 @@
     <!-- //<h1>
     //  test
     //</h1> -->
-    <buy-now-button/>
-    <add-to-cart-button/>
+        <buy-now-button/>
+        <add-to-cart-button :product="product" :size="selectedSize" />
     </div>
   </div>
 </template>
@@ -48,6 +48,7 @@ const id = route.params.id
 const product = ref(null)
 const loading = ref(true)
 const error = ref(null)
+const selectedSize = ref(null)
 
 async function fetchProduct() {
   loading.value = true
@@ -64,10 +65,13 @@ async function fetchProduct() {
 
 function addToCart() {
   const cart = useCart()
-  if (product.value) {
-    cart.addItem(product.value, 1)
-    alert('Added to cart')
+  if (!product.value) return
+    if (!selectedSize.value) {
+      alert('please select the size first, to add the products to the cart')
+    return
   }
+  cart.addItem(product.value, 1, { size: selectedSize.value })
+  alert('Added to cart')
 }
 
 onMounted(() => {
