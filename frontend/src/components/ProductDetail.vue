@@ -66,11 +66,25 @@ async function fetchProduct() {
 function addToCart() {
   const cart = useCart()
   if (!product.value) return
-    if (!selectedSize.value) {
-      alert('please select the size first, to add the products to the cart')
+  // allow electronics and jewelry to be added without a selected size
+  function isJewelryCategory(cat) {
+    try {
+      const c = String(cat || '').toLowerCase().trim()
+      return c === 'jewelery' || c === 'jewellery' || c === 'jewellary' || c === 'jewelry'
+    } catch (e) {
+      return false
+    }
+  }
+
+  const cat = product.value?.category || ''
+  if (!selectedSize.value && !isJewelryCategory(cat) && String(cat).toLowerCase().trim() !== 'electronics') {
+    alert('please select the size first, to add the products to the cart')
     return
   }
-  cart.addItem(product.value, 1, { size: selectedSize.value })
+
+  const opts = {}
+  if (selectedSize.value) opts.size = selectedSize.value
+  cart.addItem(product.value, 1, opts)
   alert('Added to cart')
 }
 

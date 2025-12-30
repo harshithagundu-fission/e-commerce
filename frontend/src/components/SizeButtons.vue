@@ -1,9 +1,12 @@
 <template>
   <div>
     <div class="flex items-center gap-2 mb-2">
-      <p class="font-semibold">Size</p>
+      <p v-if="!isJewellary" class="font-semibold">Size</p>
       <template v-if="isElectronics">
         <button type="button" class="text-yellow-700 bg-yellow-100 px-2 py-1 rounded text-sm" aria-hidden="true">Only this is available for now</button>
+      </template>
+      <template v-else-if="isJewellary">
+        <!-- jewelry: do not show a Size Chart -->
       </template>
       <template v-else>
         <button
@@ -18,7 +21,7 @@
       </template>
     </div>
 
-    <div class="flex gap-2" v-if="!isElectronics">
+    <div class="flex gap-2" v-if="!isElectronics && !isJewellary">
       <button
         v-for="size in sizes"
         :key="size"
@@ -83,6 +86,16 @@ const closeBtn = ref(null)
 const isElectronics = computed(() => {
   try {
     return String(props.category || '').toLowerCase().trim() === 'electronics'
+  } catch (e) {
+    return false
+  }
+})
+
+const isJewellary = computed(() => {
+  try {
+    const c = String(props.category || '').toLowerCase().trim()
+    // accept common variants/misspellings: jewelery, jewellery, jewellary, jewelry
+    return c === 'jewelery' || c === 'jewellery' || c === 'jewellary' || c === 'jewelry'
   } catch (e) {
     return false
   }

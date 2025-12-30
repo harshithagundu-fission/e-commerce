@@ -14,6 +14,4 @@ function go() {
 }
 </script>
 
-<style scoped>
-/* minimal styling; relies on existing theme classes */
-</style>
+

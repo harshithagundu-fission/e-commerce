@@ -1,6 +1,4 @@
 <template>
-
-
 <nav class="bg-neutral-secondary-soft fixed w-full z-20 top-0 start-0 border-b border-default">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <div class="flex items-center space-x-3 rtl:space-x-reverse"> 
@@ -13,15 +11,13 @@
     </button>
     <div class="hidden w-full md:block md:w-auto" id="navbar-solid">
       <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-default rounded-base bg-neutral-secondary-soft md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-neutral-secondary-soft">
-        <li>
-          <a href="#" class="block py-2 px-3 text-white bg-brand rounded md:bg-transparent md:text-fg-brand md:p-0" aria-current="page">Home</a>
-        </li>
         <!-- other left-side links removed or commented to keep header clean -->
       </ul>
     </div>
     <!-- Right side actions (always visible) -->
     <div class="flex items-center space-x-3">
-      <router-link to="/about" class="px-3 py-2 rounded hover:bg-neutral-tertiary text-heading">About</router-link>
+      <router-link to="/services" class="px-3 py-2 rounded hover:bg-neutral-tertiary text-heading">Home</router-link>
+      <router-link to="/profile" class="px-3 py-2 rounded hover:bg-neutral-tertiary text-heading">Profile</router-link>
       <router-link to="/cart" class="flex items-center px-3 py-2 rounded hover:bg-neutral-tertiary">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4"/></svg> 
         <span class="ml-2">Cart</span>

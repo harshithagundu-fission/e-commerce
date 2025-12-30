@@ -1,6 +1,6 @@
 import{createRouter,createWebHistory}from"vue-router";
 import Homepage from"../views/Homepage.vue";
-import About from"../views/about.vue";
+import Profile from"../views/profile.vue";
 import Services from"../components/Services.vue";
 import Login from '../views/Login.vue';
 import Loggingout from '../views/Loggingout.vue';
@@ -10,7 +10,7 @@ import bag from '../views/Products/bag.vue';
 import BuyNow from "../views/BuyNow.vue";
 import AddToCartButton from "../components/AddToCartButton.vue";
 import LoggedOut from "../views/LoggedOut.vue";
-
+import Home from"../views/Home.vue";
 
 
 const routes=[
@@ -20,9 +20,9 @@ const routes=[
     component:Homepage
     },
 {
-        path:"/about",
-        name:"About",
-        component:About
+        path:"/profile",
+        name:"Profile",
+        component:Profile
     },
     {
         path:"/login",
@@ -73,6 +73,11 @@ const routes=[
         name:"AddToCartButton",
         component:AddToCartButton   
     },
+    {
+        path:"/home",
+        name:"Home",
+        component:Home  
+    }
    
         
    

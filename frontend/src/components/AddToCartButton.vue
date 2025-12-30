@@ -21,9 +21,22 @@ function addToCart() {
   const product = props.product || demoProduct
   const size = props.size || ''
 
-  if (props.product && !size && props.product.category !== 'electronics') {
-    alert('please select the size first, to add the products to the cart')
-    return
+  // Allow adding products without a selected size for electronics and jewelry categories
+  function isJewelryCategory(cat) {
+    try {
+      const c = String(cat || '').toLowerCase().trim()
+      return c === 'jewelery' || c === 'jewellery' || c === 'jewellary' || c === 'jewelry'
+    } catch (e) {
+      return false
+    }
+  }
+
+  if (props.product && !size) {
+    const cat = props.product.category || ''
+    if (String(cat).toLowerCase().trim() !== 'electronics' && !isJewelryCategory(cat)) {
+      alert('please select the size first, to add the products to the cart')
+      return
+    }
   }
 
   const opts = {}

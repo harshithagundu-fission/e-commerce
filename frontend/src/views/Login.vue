@@ -8,16 +8,29 @@
         <input v-model="email" type="email" required placeholder="you@example.com" class="w-full p-2 border rounded" />
       </div>
 
-      <div>
-        <label class="block text-sm font-medium mb-1">Password (optional)</label>
-        <input v-model="password" type="password" placeholder="password (optional)" class="w-full p-2 border rounded" />
-      </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input
+            v-model="password"
+            type="password"
+            required
+            :aria-invalid="!isPasswordValid"
+            placeholder="At least 8 chars, upper+lower+number+special"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+            class="w-full p-2 border rounded"
+          />
+          <p v-if="password && !isPasswordValid" class="text-sm text-red-600 mt-1">Password must be 8+ chars and include uppercase, lowercase, number and special character.</p>
+        </div>
 
       <div class="flex items-center justify-between">
         <button :disabled="loading" type="submit" class="bg-fg-brand text-white px-4 py-2 rounded">
           {{ loading ? 'Logging in...' : 'Login' }}
         </button>
-        <button type="button" class="text-sm text-muted" @click="fillDemo">Fill demo</button>
+
+        <!-- Secondary login uses entered credentials (calls submit) -->
+        <button type="button" @click="submit" class="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white">
+          Login
+        </button>
       </div>
     </form>
 
@@ -30,6 +43,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import {computed}from'vue';
 
 const router = useRouter()
 const email = ref('')
@@ -37,6 +51,10 @@ const password = ref('')
 const loading = ref(false)
 const error = ref(null)
 const success = ref(null)
+
+const isPasswordValid = computed(() => {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(password.value)
+});
 
 function validateEmail(value) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -48,6 +66,12 @@ async function submit() {
   success.value = null
   if (!validateEmail(email.value)) {
     error.value = 'Please enter a valid email address.'
+    return
+  }
+
+  // Enforce password naming convention
+  if (!isPasswordValid.value) {
+    error.value = 'Password must be at least 8 characters and include uppercase, lowercase, a number and a special character.'
     return
   }
 
@@ -72,14 +96,14 @@ async function submit() {
       // navigate to home (products)
       // notify other components (header) that login state changed
       try { window.dispatchEvent(new Event('storage')) } catch (e) {}
-      setTimeout(() => router.push('/'), 600)
+      setTimeout(() => router.push('/services'), 600)
     } else {
       // Demo fallback: accept any email and mark as logged in locally
       localStorage.setItem('authEmail', email.value)
       // notify header to update
       try { window.dispatchEvent(new Event('storage')) } catch (e) {}
       success.value = 'Logged in (demo mode).'
-      setTimeout(() => router.push('/'), 600)
+      setTimeout(() => router.push('/services'), 600)
     }
   } catch (err) {
     console.error(err)
@@ -89,10 +113,7 @@ async function submit() {
   }
 }
 
-function fillDemo() {
-  email.value = 'demo@example.com'
-  password.value = ''
-}
+// Note: quick demo login removed — secondary Login now calls `submit()` to use user credentials
 </script>
 
 <style scoped>
