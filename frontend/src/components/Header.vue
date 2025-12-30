@@ -1,5 +1,5 @@
 <template>
-<nav class="bg-neutral-secondary-soft fixed w-full z-20 top-0 start-0 border-b border-default">
+<nav class="bg-slate-800 text-white fixed w-full z-20 top-0 start-0 border-b border-slate-700">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <div class="flex items-center space-x-3 rtl:space-x-reverse"> 
       <img src="/logo.svg" class="h-7" alt="Site Logo" />
