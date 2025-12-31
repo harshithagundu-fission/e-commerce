@@ -1,13 +1,12 @@
 import{createRouter,createWebHistory}from"vue-router";
-import Homepage from"../views/Homepage.vue";
+import ProductsHomepage from"../views/ProductsHomepage.vue";
 import Profile from"../views/profile.vue";
 import Services from"../components/Services.vue";
 import Login from '../views/Login.vue';
 import Loggingout from '../views/Loggingout.vue';
 import ProductDetail from '../components/ProductDetail.vue';
 import Cart from '../views/Cart.vue';
-import bag from '../views/Products/bag.vue';
-import BuyNow from "../views/BuyNow.vue";
+import Checkout from "../views/Checkout.vue";
 import AddToCartButton from "../components/AddToCartButton.vue";
 import LoggedOut from "../views/LoggedOut.vue";
 import Home from"../views/Home.vue";
@@ -16,8 +15,8 @@ import Home from"../views/Home.vue";
 const routes=[
     {
     path:"/",
-    name:"Homepage",
-    component:Homepage
+    name:"ProductsHomepage",
+    component:ProductsHomepage
     },
 {
         path:"/profile",
@@ -30,12 +29,7 @@ const routes=[
         component:Login,
         meta: { hideHeader: true }
     },
-    {
-        path: "/bag",
-        name: "bag",
-        component: bag
-    },
-    {
+      {
         path:"/logout",
         name:"Loggingout",
         component:Loggingout,
@@ -58,11 +52,11 @@ const routes=[
         component:Services
     },
     {   
-        path:"/buynow",
-        name:"BuyNow",
-        component:BuyNow
+        path:"/checkout",
+        name:"Checkout",
+        component:Checkout
     },
-        {
+    {
             path: '/loggedout',
             name: 'LoggedOut',
             component: LoggedOut,

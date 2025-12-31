@@ -113,9 +113,5 @@ async function submit() {
   }
 }
 
-// Note: quick demo login removed — secondary Login now calls `submit()` to use user credentials
 </script>
 
-<style scoped>
-.text-muted { color: #6b7280 }
-</style>

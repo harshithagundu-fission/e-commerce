@@ -93,6 +93,4 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-.text-muted { color: #6b7280 }
-</style>
+

@@ -37,10 +37,7 @@ function buyNow() {
   }
 
   // Navigate to the BuyNow route where checkout is handled
-  router.push({ name: 'BuyNow' })
+  router.push({ name: 'Checkout' })
 }
 </script>
 
-<style scoped>
-button { font-weight: 600 }
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <Services/>
+	<Services/>
 </template>
 
 <script setup>
