@@ -3,43 +3,15 @@
     <section class="pt-8 max-w-7xl mx-auto p-4">
       <div class="flex items-center justify-between mb-6">
         <h1 class="text-3xl font-bold">Products</h1>
-        <!-- <p class="text-sm text-muted">Fetched from a sample products API</p> -->
       </div>
 
       <!-- Add Product Form -->
       <div class="mb-6">
-        <!-- <form @submit.prevent="addProduct" class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-end"> -->
-          <!-- Title (commented out per request)
-          <input v-model="newProduct.title" placeholder="Title" required class="p-2 border rounded" />
-          -->
-          <!-- <input v-model.number="newProduct.price" type="number" placeholder="Price" required class="p-2 border rounded" /> -->
-          <!-- Image URL (commented out per request)
-          <input v-model="newProduct.image" placeholder="Image URL" class="p-2 border rounded sm:col-span-2" />
-          -->
-          <!-- Description (commented out per request)
-          <textarea v-model="newProduct.description" placeholder="Description" rows="2" class="p-2 border rounded sm:col-span-2"></textarea>
-          -->
-          <!-- Select Category (commented out per request)
-          <select v-model="newProduct.category" class="p-2 border rounded">
-            <option value="">Select category</option>
-            <option value="clothing">Clothing</option>
-            <option value="electronics">Electronics</option>
-            <option value="accessories">Accessories</option>
-            <option value="home">Home</option>
-            <option value="other">Other</option>
-          </select>
-          -->
-          <!-- <div class="sm:col-span-2">
-            <button type="submit" class="bg-fg-brand text-white px-4 py-2 rounded">Create product</button>
-          </div>
-        </form> -->
+        
       </div>
 
       <!-- Filters / Debug -->
       <div class="mb-4 text-sm text-muted flex items-center justify-between">
-        <!-- <div class="flex items-center gap-4">
-          <div>Products in list: <strong>{{ products.length }}</strong></div>
-        </div> -->
         <div class="flex items-center gap-3">
           <label class="text-sm">Filter:</label>
           <select v-model="selectedCategory" class="p-2 border rounded">

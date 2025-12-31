@@ -5,7 +5,6 @@
                 <h2 class="text-xl font-semibold mb-3">Logged-in user</h2>
                 <div v-if="hasAuth">
                     <p><strong>Email:</strong> {{ authEmail }}</p>
-                    <!-- <p v-if="authToken"><strong>Login token:</strong> {{ authToken }}</p> -->
                     <p v-if="authId"><strong>Login id:</strong> {{ authId }}</p>
                 </div>
                 <div v-else class="text-sm text-muted">No user is currently logged in.</div>

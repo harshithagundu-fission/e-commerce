@@ -34,7 +34,6 @@ function logout() {
   try { window.dispatchEvent(new Event('storage')) } catch (e) {}
 
     // Redirect to the login page so user can log back in.
-    // (We previously tried to close the tab; browsers block that for regular tabs.)
     try {
       router.replace('/loggedout')
     } catch (e) {
@@ -43,5 +42,3 @@ function logout() {
 }
 </script>
 
-<style scoped>
-</style>

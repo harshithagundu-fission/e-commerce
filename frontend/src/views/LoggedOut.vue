@@ -12,6 +12,4 @@
 // simple static logged-out page with a login button
 </script>
 
-<style scoped>
-.text-muted { color: #6b7280 }
-</style>
+
