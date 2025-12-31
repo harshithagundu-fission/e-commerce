@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed, watch } from 'vue'
 
+
 export const useCart = defineStore('cart', () => {
   const items = ref([]) // each item: { id: uniqueKey, productId, title, price, qty, size }
 

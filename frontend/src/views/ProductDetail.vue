@@ -1,21 +1,21 @@
 <template>
   <div class="max-w-4xl mx-auto mt-20 p-6">
-    <div v-if="loading" class="text-center py-12">Loading product...</div>
-    <div v-else-if="error" class="text-center text-red-600">{{ error }}</div>
+    <div v-if="productsStore.productLoading" class="text-center py-12">Loading product...</div>
+    <div v-else-if="productsStore.productError" class="text-center text-red-600">{{ productsStore.productError }}</div>
     <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-      <img :src="product.image" alt="" class="w-full h-96 object-contain bg-white p-4 rounded" />
+      <img :src="productsStore.product.image" alt="" class="w-full h-96 object-contain bg-white p-4 rounded" />
 
       <div>
-        <h1 class="text-2xl font-bold mb-2">{{ product.title }}</h1>
-        <p class="text-xl font-semibold text-green-600 mb-4">${{ product.price }}</p>
-        <p class="text-body mb-4">{{ product.description }}</p>
+        <h1 class="text-2xl font-bold mb-2">{{ productsStore.product.title }}</h1>
+        <p class="text-xl font-semibold text-green-600 mb-4">${{ productsStore.product.price }}</p>
+        <p class="text-body mb-4">{{ productsStore.product.description }}</p>
 
                 <div class="flex items-center gap-3">
                           <button @click="addToCart" class="bg-fg-brand text-white px-4 py-2 rounded">Add to cart</button>
-                          <BuyNowButton :product="product" />
+                          <BuyNowButton :product="productsStore.product" />
                           <router-link to="/" class="text-sm text-muted">Back to products</router-link>
                         <div>
-                          <SizeButtons v-model="selectedSize" :category="product?.category" />
+                          <SizeButtons v-model="selectedSize" :category="productsStore.product?.category" />
                         </div>
                         </div>
       </div>
@@ -28,6 +28,7 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import axios from 'axios'
 import { useCart } from '../stores/cart'
+import { useProducts } from '../stores/products'
 import BuyNowButton from '../components/BuyNowButton.vue'
 import SizeButtons from '../components/SizeButtons.vue'
 
@@ -35,32 +36,21 @@ import SizeButtons from '../components/SizeButtons.vue'
 const route = useRoute()
 const id = route.params.id
 
-const product = ref(null)
-const loading = ref(true)
-const error = ref(null)
+const productsStore = useProducts()
 const selectedSize = ref(null)
 
 async function fetchProduct() {
-  loading.value = true
-  error.value = null
-  try {
-    const res = await axios.get(`https://fakestoreapi.com/products/${id}`)
-    product.value = res.data
-  } catch (err) {
-    error.value = err?.message || 'Failed to load product'
-  } finally {
-    loading.value = false
-  }
+  await productsStore.fetchProduct(id)
 }
 
 function addToCart() {
   const cart = useCart()
-  if (!product.value) return
+  if (!productsStore.product) return
   if (!selectedSize.value) {
     alert('please select the size first, to add the products to the cart')
     return
   }
-  cart.addItem(product.value, 1, { size: selectedSize.value })
+  cart.addItem(productsStore.product, 1, { size: selectedSize.value })
   alert('Added to cart')
 }
 
