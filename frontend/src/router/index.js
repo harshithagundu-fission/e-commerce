@@ -1,6 +1,6 @@
 import{createRouter,createWebHistory}from"vue-router";
 import ProductsHomepage from"../views/ProductsHomepage.vue";
-import Profile from"../views/profile.vue";
+import Profile from"../views/Profile.vue";
 import Services from"../components/Services.vue";
 import Login from '../views/Login.vue';
 import Loggingout from '../views/Loggingout.vue';
@@ -10,6 +10,7 @@ import Checkout from "../views/Checkout.vue";
 import AddToCartButton from "../components/AddToCartButton.vue";
 import LoggedOut from "../views/LoggedOut.vue";
 import Home from"../views/Home.vue";
+
 
 
 const routes=[
